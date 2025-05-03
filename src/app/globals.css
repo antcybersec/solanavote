@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 270 60% 8%; /* Slightly darker, more saturated purple */
+    --foreground: 0 0% 98%;
+    --card: 270 50% 12%; /* Slightly lighter card */
+    --card-foreground: 0 0% 95%;
+    --popover: 270 50% 10%; /* Slightly darker popover */
+    --popover-foreground: 0 0% 95%;
+    --primary: 270 95% 65%; /* Slightly brighter Solana Purple */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 190 90% 50%; /* Slightly less saturated Teal */
+    --secondary-foreground: 270 50% 10%;
+    --muted: 270 35% 20%; /* More muted purple */
+    --muted-foreground: 0 0% 65%; /* Brighter muted text */
+    --accent: 328 100% 60%; /* Brighter Pink */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 75% 55%; /* Brighter destructive */
+    --destructive-foreground: 0 0% 98%;
+    --border: 270 40% 25%; /* Slightly more visible border */
+    --input: 270 40% 18%;
+    --ring: 190 95% 60%; /* Brighter Teal ring */
+    --chart-1: 270 95% 65%; /* Primary */
+    --chart-2: 190 90% 50%; /* Secondary */
+    --chart-3: 328 100% 60%; /* Accent */
+    --chart-4: 45 90% 60%; /* Brighter Yellow */
+    --chart-5: 210 85% 65%; /* Brighter Blue */
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Keep dark theme same as light for this design */
+    --background: 270 60% 8%;
+    --foreground: 0 0% 98%;
+    --card: 270 50% 12%;
+    --card-foreground: 0 0% 95%;
+    --popover: 270 50% 10%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 270 95% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 190 90% 50%;
+    --secondary-foreground: 270 50% 10%;
+    --muted: 270 35% 20%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 328 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 270 40% 25%;
+    --input: 270 40% 18%;
+    --ring: 190 95% 60%;
+    --chart-1: 270 95% 65%;
+    --chart-2: 190 90% 50%;
+    --chart-3: 328 100% 60%;
+    --chart-4: 45 90% 60%;
+    --chart-5: 210 85% 65%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground min-h-screen font-sans; /* Use font-sans from layout */
+    /* Enhanced background with subtle pattern and glow */
+    background-image:
+      radial-gradient(circle at 1px 1px, hsl(var(--primary) / 0.05) 1px, transparent 0), /* Dot Grid */
+      radial-gradient(ellipse at top left, hsl(var(--primary) / 0.1), transparent 50%), /* Top-left glow */
+      radial-gradient(ellipse at bottom right, hsl(var(--secondary) / 0.1), transparent 50%); /* Bottom-right glow */
+    background-size: 16px 16px, auto, auto; /* Control grid size */
+    background-attachment: fixed; /* Keep pattern fixed */
+  }
+}
+
+/* Custom styles for floating effect and other enhancements */
+@layer components {
+  .floating-element {
+    @apply shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-primary/30;
+    /* Add a subtle border animation on hover */
+     position: relative;
+  }
+   .floating-element::before {
+      content: '';
+      position: absolute;
+      inset: -2px; /* Adjust thickness */
+      border-radius: calc(var(--radius) + 2px); /* Match outer radius */
+      background: conic-gradient(from var(--angle, 0deg), hsl(var(--secondary)), hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)));
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+      z-index: -1; /* Behind the card content */
+       animation: spin 5s linear infinite paused; /* Paused animation */
+    }
+
+     .floating-element:hover::before {
+      opacity: 0.6; /* Fade in on hover */
+       animation-play-state: running; /* Start animation on hover */
+    }
+
+   @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+   @keyframes spin {
+      to { --angle: 360deg; }
+    }
+
+
+  .glossy-icon {
+    @apply filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)];
+     /* Simple drop shadow for now */
+  }
+}
+
+    
