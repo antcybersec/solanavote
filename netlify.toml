@@ -1,0 +1,12 @@
+# Netlify configuration for Next.js projects
+
+[build]
+  # Command to build the Next.js application
+  command = "npm run build"
+
+  # Directory containing the built static files and serverless functions
+  publish = ".next"
+
+# Plugin to handle Next.js specifics on Netlify
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
